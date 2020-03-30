@@ -143,5 +143,9 @@ media
 static
 
 #input data
-input/
+input/*.parquet
+input/images/*
 .*
+
+!.gitignore
+
