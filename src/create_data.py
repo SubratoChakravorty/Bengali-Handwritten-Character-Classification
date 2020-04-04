@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 # extracts region of interest and resize to 64 * 64
 def resize(df, size=64, need_progress_bar=True):
     resized = {}
-    resize_size=64
+    resize_size = size
     angle=0
     if need_progress_bar:
         for i in tqdm(range(df.shape[0])):
@@ -55,17 +55,17 @@ def resize(df, size=64, need_progress_bar=True):
     return resized
 
 
-# for i in range(4):
-#     df = pd.read_parquet(f'../input/train_image_data_{i}.parquet', engine='pyarrow')
-#     image_ids = df.image_id.values
-#     df = df.drop('image_id', axis=1)
-#     resize_df = resize(df)
-#
-#     image_values = resize_df.values
-#     for j, image_id in tqdm(enumerate(image_ids), total=len(image_ids)):
-#         img = Image.fromarray(image_values[j,:].reshape(64, 64))
-#
-#         img.save(f'../input/images/{image_id}.png')
+for i in range(4):
+    df = pd.read_parquet(f'../input/train_image_data_{i}.parquet', engine='pyarrow')
+    image_ids = df.image_id.values
+    df = df.drop('image_id', axis=1)
+    resize_df = resize(df)
+
+    image_values = resize_df.values
+    for j, image_id in tqdm(enumerate(image_ids), total=len(image_ids)):
+        img = Image.fromarray(image_values[j,:].reshape(64, 64))
+
+        img.save(f'../input/images/{image_id}.png')
 
 
 # Split train.csv into train, test and val set

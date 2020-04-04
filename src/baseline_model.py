@@ -1,30 +1,13 @@
-import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-from glob import glob
-import time, gc
-import cv2
-import albumentations as A
-from PIL import Image
-from tensorflow import keras
-import matplotlib.image as mpimg
-from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Model
-from keras.models import clone_model, load_model
 from keras.layers import Dense,Conv2D,Flatten,MaxPool2D,Dropout,BatchNormalization, Input
-from keras.optimizers import Adam
-from keras.callbacks import ReduceLROnPlateau, EarlyStopping, ModelCheckpoint
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
-import PIL.Image as Image, PIL.ImageDraw as ImageDraw, PIL.ImageFont as ImageFont
-from matplotlib import pyplot as plt
-import seaborn as sns
-import scipy.io as io
-from keras import backend as K
 from .custom_generator import MultiOutputDataGenerator
 
 IMG_SIZE = 64
 N_CHANNELS = 1
 
+
+# Create Model
 inputs = Input(shape=(IMG_SIZE, IMG_SIZE, 1))
 
 model = Conv2D(filters=32, kernel_size=(3, 3), padding='SAME', activation='relu', input_shape=(IMG_SIZE, IMG_SIZE, 1))(
@@ -91,6 +74,8 @@ hist_mat = []
 train_df = pd.read_csv('./input/train_df.csv')
 val_df = pd.read_csv('./input/val_df.csv')
 
+
+# Set up data generators for training and validation using custom DataGenerator
 datagen = MultiOutputDataGenerator(
     featurewise_center=False,  # set input mean to 0 over the dataset
     samplewise_center=False,  # set each sample mean to 0
@@ -109,7 +94,7 @@ val_datagen = MultiOutputDataGenerator(rescale=1. / 255.)
 
 train_generator = datagen.flow_from_dataframe(
     dataframe=train_df,
-    directory="./input/png_images",
+    directory="./input/images",
     x_col="filepath",
     y_col=['grapheme_root', 'vowel_diacritic', 'consonant_diacritic'],
     batch_size=batch_size,
@@ -121,7 +106,7 @@ train_generator = datagen.flow_from_dataframe(
 
 val_generator = val_datagen.flow_from_dataframe(
     dataframe=val_df,
-    directory="./input/png_images",
+    directory="./input/images",
     x_col="filepath",
     y_col=['grapheme_root', 'vowel_diacritic', 'consonant_diacritic'],
     batch_size=batch_size,
