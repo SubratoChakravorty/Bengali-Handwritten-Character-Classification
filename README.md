@@ -19,6 +19,7 @@ pip install -r requirements.txt
 
 
 ### To pre-process dataset (Only once)
+Download the data from the link given above and then extract all the files and put them under the \input folder.
 ```
 cd src
 python create_data.py
