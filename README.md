@@ -6,10 +6,30 @@ We try to identify the three grapheme elements - grapheme root, vowel diacritics
 
 The dataset for this project is taken from a Kaggle Competition and can be found [here](https://www.kaggle.com/c/bengaliai-cv19/data). 
 ![GitHub Logo](/figures/standardarch.png)
-Format: ![Alt Text](url)
+
+Histories of different models can be found in histories folder. Code to train a standard cnn model and a dense net model is present in __src__ folder and code to train other models will be added with time.
 
 ### Requirements
 All the package requirements can be found in requirements.txt. To install the requirements:
 ```
+git clone https://github.com/ucrajkumar/ece285
+cd Bengali-Handwritten-Character-Classification
 pip install -r requirements.txt
 ```
+
+
+### To pre-process dataset (Only once)
+```
+cd src
+python create_data.py
+```
+
+### To train a model
+```
+cd src 
+python baseline_model.py # baseline (standard cnn) model
+python model_densenet.py # dense net model
+
+```
+
+
