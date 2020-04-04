@@ -12,7 +12,7 @@ Histories of different models can be found in histories folder. Code to train a 
 ### Requirements
 All the package requirements can be found in requirements.txt. To install the requirements:
 ```
-git clone https://github.com/ucrajkumar/ece285
+git clone https://github.com/SubratoChakravorty/Bengali-Handwritten-Character-Classification
 cd Bengali-Handwritten-Character-Classification
 pip install -r requirements.txt
 ```
