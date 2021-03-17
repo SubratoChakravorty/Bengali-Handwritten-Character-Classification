@@ -29,7 +29,7 @@ python create_data.py
 ```
 cd src 
 python baseline_model.py # baseline (standard cnn) model
-python model_densenet.py # dense net model
+python model_densenet.py # densenet model
 
 ```
 
